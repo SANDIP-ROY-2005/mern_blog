@@ -37,4 +37,16 @@ app.get('/',(req,res)=>{
 app.use(express.json());
 app.use('/api/user', router);
 app.use('/api/auth', authRouter)
+
+// setting up middleware
+app.use((err,req,res,next)=>{
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "internal server error";
+    res.status(statusCode).json({
+        success:false,
+        statusCode,
+        message
+    });
+
+});
  
