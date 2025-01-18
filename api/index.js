@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/user.route.js')
+const authRouter = require('./routes/auth.route.js')
 // import userRouter from "./routes/user.route.js";
 
  //one way to connect dot env would be 
@@ -26,5 +27,8 @@ app.get('/',(req,res)=>{
     res.send("hello world,  ");
 });
 
+
+app.use(express.json());
 app.use('/api/user', router);
+app.use('/api/auth', authRouter)
  
