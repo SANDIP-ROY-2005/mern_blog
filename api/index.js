@@ -1,7 +1,12 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const router = require('./routes/user.route.js')
-const authRouter = require('./routes/auth.route.js')
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const router = require('./routes/user.route.js')
+// const authRouter = require('./routes/auth.route.js')
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import router from './routes/user.route.js';
+import authRouter from './routes/auth.route.js';
 // import userRouter from "./routes/user.route.js";
 
  //one way to connect dot env would be 
@@ -9,7 +14,8 @@ const authRouter = require('./routes/auth.route.js')
  //dotenv.config(); 
  // or simply the below mentioned 
 
-require('dotenv').config()
+// require('dotenv').config()
+dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{
     console.log("MongoDb is connected");

@@ -1,6 +1,7 @@
-const { default: User } = require("../models/user.model.js");
+// const { default: User } = require("../models/user.model.js");
+import User from "../models/user.model.js";
 
-const signup = async(req,res)=>{
+ export const signup = async(req,res)=>{
     // res.json({message: "signup  api is working oo yeah "});
     // console.log(req.body);
     const {username,email,password} = req.body;
@@ -22,4 +23,5 @@ const signup = async(req,res)=>{
      
 
 };
-module.exports = {signup};
+// module.exports = {signup};
+// export default signup; this is saying that signup is not exported 
