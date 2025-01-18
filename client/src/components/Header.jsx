@@ -30,7 +30,7 @@ import { FaMoon } from 'react-icons/fa'
             <FaMoon/>
         </Button>
         <Link to="/sign-in">
-        <Button gradientDuoTone='purpleToBlue'>SIGN IN</Button>
+        <Button gradientDuoTone='purpleToBlue' outline>SIGN IN</Button>
         </Link>
 
         <Navbar.Toggle/>
