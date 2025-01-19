@@ -1,6 +1,6 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { set } from 'mongoose';
-import React, { lazy, useState } from 'react'
+import React, {   useState } from 'react'
 import { Link ,useNavigate } from 'react-router-dom'
 
 const Signup = () => {
@@ -89,10 +89,10 @@ const Signup = () => {
               </div>
 
               <div>
-                <Label value='Your Passoword' />
+                <Label value='Your Password' />
                 <TextInput
                  type='password'
-                 placeholder='Passoword'
+                 placeholder='Password'
                  id='password'
                  onChange={handleChange}
                 />
