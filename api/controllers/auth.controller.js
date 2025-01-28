@@ -15,7 +15,7 @@ export const signup = async (req, res, next) => {
 
   }
   const hashedPassword = bcryptjs.hashSync(password, 10);
-
+// if the entered credentials are valid then we will make a new user out of the given data 
   const newUser = new User({
     username,
     email,
