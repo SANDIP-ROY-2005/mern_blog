@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
+
+// logic for signup for user
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
@@ -30,6 +32,9 @@ export const signup = async (req, res, next) => {
   }
 };
 
+
+
+// logic for signin for user
 export const signin = async (req, res, next) => {
 // so here we would basically try to get the username ,email ,password the user registered with and verify the enter fields with that present in our database if all entered fields are correct then we would set a cookie inside the borwser of the user in the frontend ,its done to check if the user is authenticated or not 
   const { username, password } = req.body;
@@ -80,6 +85,50 @@ export const signin = async (req, res, next) => {
     return next(error);
   }
 };
+
+
+
+//logic for signup for user using google account 
+export const google = async(req,res,next)=>{
+
+  const {email,name,googlePhotoUrl} = req.body;
+  try {
+
+  // here we are trying to find the user thorough the email he/she had entered
+    const user = await User.findOne({email}); 
+    if(user){
+      const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
+      const {password, ...rest} = user._doc;
+      res.status(200).cookie('access_token',token,{httpOnly:true,}).json(rest);
+    }
+    // if the user doesnt exist then we make a new user
+    else{
+      const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+
+      const hashedPassword = bcryptjs.hashSync(generatedPassword,10);
+      const newUser = new User(
+        {
+          username:name.toLowerCase().split('').join('') + Math.random().toString(9).slice(-4),
+          email,
+          password:hashedPassword,
+          profilePicture: googlePhotoUrl,
+        }
+      );
+
+       await newUser.save();
+       // till here the new user has been created successfully now we need to send cookie to the frontend of the browser of user
+       const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET);
+       const {password, ...rest} = newUser._doc;
+       res.status(200).cookie('access_token',token,{httpOnly:true,}).json(rest); 
+    }
+
+
+    
+  } catch (error) {
+    next(error);
+  }
+
+}
 
 // module.exports = {signup};
 // export default signup; this is saying that signup is not exported 
