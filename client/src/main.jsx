@@ -31,6 +31,7 @@ import App from "./App.jsx"
 import "./index.css"
 import {  persistor } from "./redux/store.js"
 import { PersistGate } from "redux-persist/integration/react"
+import ThemeProvider from "./components/ThemeProvider.jsx"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
@@ -38,7 +39,10 @@ root.render(
   <React.StrictMode>
     <PersistGate persistor={persistor}>
     <Provider store={store}>
+      <ThemeProvider>
       <App />
+      </ThemeProvider>
+       
     </Provider>
     </PersistGate>
   </React.StrictMode>,
